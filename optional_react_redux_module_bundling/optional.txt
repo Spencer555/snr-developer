@@ -1,0 +1,105 @@
+why redux 
+- good for management large state - redux solve when things get really complicated 
+-  usefull for sharing data between containers 
+- predictable state management using the 3 principles 
+
+
+the three priciples of redux
+
+1 single source of truth  = one big object that describes the entire state of the app 
+2 state is read only = this encourages immutabilit not modifiying the object we create a new state after each action is taken by the user 
+3 changes using pure functions = this receives and input and always return a predictable output
+
+main keywords
+ action -> reducer -> store -> make changes
+
+ action  = is something a user does e.g clicking a button or dropdown menu etc
+
+ reducer = a pure function that receives the action as input and create an output which is the store( the entire state of the app) and store gets updated.
+ because of state change react make changes to the view layer
+
+ with redux all actions go through one reducer and the reducer because its a pure function always returns the same state based on the action and update the store and the store that represent what our app to look like then it makes changes 
+
+
+ it uses flux pattern achitechre pattern 
+
+ action -> dispatcher to dispatch action -> to the store -> view 
+ unidirectional data flow
+
+ if the view get updated we restart again 
+
+ before this we used mvc 
+ model view controller 
+
+ action -> controller -> model -> view
+ which made things messy   when apps got bigger it was not making it not easier to understand 
+
+
+
+redux-tookit 
+solve the redux boilerplate(code u write that kind of similar) issue
+
+check it out on your own once u master redux
+
+redux connect() when we use this we no longer need to subscribe to a component to redux before we can use it this is tedious and connect() simplifies that for us since it makes the componet redux aware
+
+so mainly we connect app.js since its the gateway
+these smart files are called containers e.g app.js app.css
+
+we install redux logger and help us debug in console
+
+to handle async we need redux thunk
+
+redux make communication easy if we want to communicate we just connect them
+
+popular tools for react 
+react-router
+gatsby.js  - good for static website in react for documentation
+next.js - popular for server side rendered apps 
+mui - react syling 
+semantic us - for styling
+redux-saga - its like a supercharged redux thunk
+
+make sure u have a justifiable reason before add an externall stuff
+
+
+module bundler as our apps get bigger we have more and javascript we need to bundle or js together for efficiency and improvement of speed and maximize delivery create react app uses webpact to do this
+
+
+module bundlers 
+parcel - use for when its a small project u have to get up and going u dont need to worry about configuration too much easy to pick up and easy to learn
+
+webpack - for large complex apps 
+
+rollup.js - use for when u are rolling your own webpack packages
+
+when u have a problem use that aspect of the documentation dont memorize everysingle thing 
+
+if it already exist use it dont reinvent the wheel dont spend all ur time learning to do a configuration file
+
+
+it best to convert javascript to vite ,react or bundler to be albe to make it work on all browsers to avoid browser version issues and perfomance issues
+
+
+
+ 
+webpack
+it bundles all our files to static assets
+webpack has 4 main ideas 
+
+1 entry - ur javascript file(where does webpack enter into ur project usually index.js) to analyze your files 
+
+2 output - where should webpack output your files
+
+loaders( they are tools that compile or transpile your code e.g from es6 to es5)
+plugins it plays a role in outputing your code (and shows how you want your code to be outputed)
+
+we also need babel to write es6 code and it would tranlate it to es5 for all browsers
+
+npm install --save-dev babel-core babel-loader babel-preset-env
+
+
+parcel 
+so we install react then we install parcel-bundle 
+
+npm install --save-dev parcel-bundle

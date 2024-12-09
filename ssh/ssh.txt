@@ -1,0 +1,148 @@
+http (hyper text transfer protocol) = allows u to send files(html, css, javascript) over the internet between browsers and servers
+
+
+ftp (file tranfer protocol) = allows u to send files, normally used when u upload hostgator or hosting platfrom
+
+
+https (hyper text transer protocol secure) = same as http but its encrypted so third parties who intercept the file while its transfered cant read it
+
+ssh (secure shell) = it allows us to communicate with computers over the internet u can use ur computer to talk to another computer
+
+
+
+to ssh 
+ssh {user} @ {host}
+
+if u are using mac or linux using ssh is simple but if u are using windows u need an ssh client e.g putty
+
+sudo apt-get install git 
+install git on linux server
+we install node js for npm 
+
+moving a folder from pc to server
+
+just use ur wsl bash to make your life easier
+
+install rsync 
+copy to folder on server with the location ~/superawesome.com
+rsync -av . root@64.23.244.135:~/superawesome.com
+
+
+three techniques used in ssh 
+
+symmetrical encryption
+asymmetrical encryption
+hashing
+
+
+
+encryption = a way to jumble up a piece of text into someting that is impossible for a third party to read without encryption
+
+
+symmetrical encryption 
+
+it uses one seeker creed for both encryption and decryption of both parties 
+so one key turns the data into giberish and if the receiver have the same key it can decrypt the data
+
+and ssh communicates thru this shared key
+
+this is done thru a key exchange algorithm a secure way to echange this keys without any bad actors incerceping it and what makes secur is the fact that the key is never transmitted instead the 2 pcs share public pieces of data and manuplilate it independently to calculate the key
+
+and the secret key is specific to each ssh session and its generated prior to client authentication so once the key is generated between these 2 parties all packets moving between these two machine must be encrypted with this key using symmetrical encryption must communicate in a private way 
+
+
+
+asymmetrical encryption
+
+uses two sepreate keys for encryption for encryption and decryption these two keys are known as public and private key so u can share the public key with anyone but the private is never shared with anyone the public keys are linked with with the private key in terms functionality the private key cannot mathmathically compute from the public key
+
+so a message encrypted with a  machine public key can only be decrypted by the same machines private key its a oneway relationship and can only be decrypted by it paired private key it strength lies in the fact the private key is never released 
+ssh only use this form during the key exchange algorithm then it uses symmetrical method since we now have the keys this is done as the difiie hellman key exchange
+
+
+
+ssh uses both symmetrical and asymmetrical
+asymmetrical is time consuming so we use it to distribute the keys then we use symmetrical for the rest
+when asymetric has been establish the client public key and generate a challenge and transmit to the client for authentication if the client can decrypts the message it means it holds the private key for the connecte then the ssh begins 
+someone can sit in the middle and pretend to be the client or host so to solve this we use hashing 
+
+this is done using hmac (hash based message authentication code) using a hash function each message generated must contain a mac
+
+so the client and the host runs it thru the hash function and if with the password the hash is the same but if its different it means its tempered with
+
+
+once a secure ssh has been stablish the server has to verify to see if user have the right to connect to it this is the ff steps 
+
+1) diffie-hellman key exchange
+2) arrive at symmetric key 
+3) make sure of no funny business 
+4) authenticate user
+
+
+even though passwords are encrypted it is still not recommeded to use the
+
+using ssh we are gonna use rsa which allows us to prove identity without password
+
+ssh in a server 
+create .ssh on desktop
+
+
+genrate ssh key
+ssh-keygen -o -t rsa -C "email@example.com"
+
+ssh-keygen -o -t rsa -C "lewisspencer555@gmail.com"
+
+it tells u where its going to save it
+
+u can share the public key with anyone u want the one with the .pub extension
+but the one with the private key never share it the one with no extension
+
+
+now we share out public key with the digital ocean server
+this code is to copy to your clipboard
+substitute with name of publc key
+pbcopy < ~/ .ssh/id_rsa.pub
+
+if pbcopy is not working use xclip 
+
+sudo apt install xclip
+xclip -sel clip < ~/.ssh/id_rsa.pub
+
+
+ssh into your server and create the .ssh folder like u did on your desktop
+if it already exist just cd into it and look for authorized_keys file if it dont exist create it 
+
+then
+nano authorized_keys
+
+
+then now ssh to the server it wont ask you for a pass word but if u have multiple keys in your ssh folder add the specific one with 
+eval "$(ssh-agent -s)"
+ssh-add ~/ .ssh/your_id_rsa
+
+u can also add the ssh to the digital ocean using the gui under settings and ssh key
+
+
+
+for windows users 
+Also, if you are on Windows, you may have to use GitBash instead of Powershell. Here are the steps that a fellow student followed:
+
+1. Download, install and open Git Bash - the link is provided at the end of the video.
+
+2. Type "ssh-agent bash" and press Enter.
+
+3. Type "ssh-add ~/.ssh/id_rsa_digitalocean" and press Enter. You should get confrimation of Identity added.
+
+4. Try connecting to your digital ocean account again via SSH. Now it shouldn't ask you for the password!
+
+
+
+
+ssh-add -D 
+removes all identites 
+
+ssh-add -L 
+shows all identities
+
+rm -r imperiautodealership/
+remove folder containing items

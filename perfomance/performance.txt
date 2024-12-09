@@ -1,0 +1,196 @@
+one of the things u would realize as a developer is that internet speed varies for everybody and people dont have time to wait for ur website to load
+
+visitors expect site to load within 2 seconds nothing signals jnr dev like having ur protfollio site load 5 mb images
+
+
+to increase speed there a 3 ways 
+1 u can imporve the frontend because it needs time to render on screen 
+2 u can improve the transfer of our files over the wire network latency(time taken to transfer file from server to frontend) and average website makes 100 requests to load fully 
+3 improve the processing done on the backend
+
+
+network performance 
+minimize the text files and optimizin images and minimizing it u can minify ur files after coding (html, css, js)
+
+on images the four main file format used on the web is 
+svg, jpg, gif, png
+
+jpg - used for photos, images and things with many colors the downside is that they dont really allow for transparency of transparent background and they are big in file size 
+
+gif - limited num of colors u can use in a gif and are smaller in size 
+
+png - limit the num of colors u can use and they tend to be smaller in size and they are used a lot around the web like logos and u can add transparency to them
+
+
+svg - vector graphics u can expand it to and it would still maintain it aspect ratio
+
+
+so pick the right format of images and compress them as much as u can without mimimizing thier quality
+
+
+
+mimimize images 
+
+- if u want transparency use a png 
+- if u want animations use a gif 
+- if u want colourful images use a jpg 
+- if u want simple icons, logos, and illustrations, use svgs 
+- reduce png with TinyPNG 
+- reduce JPG with JPEG-optimizer 
+- try to choose simple illustrations over highly detailed photographs  (using icons and svgs over images)
+-  always lower jpeg image quality (30-60 %)
+- resize image based on the display size (if ur css said ur image is 500px make the size of the image 500px not 5000px wide the larger the resolution the larger the file size)
+
+- display different sized images for different background (
+    we do that using media queries 
+
+    @media screen and (min-width:900px){
+        body{
+            background: url('./large-background.jpg') no-repeat center center fixed;
+            background-size: cover; 
+        }
+    }
+
+        @media screen and (min-width:500px){
+        body{
+            background: url('./large-background.jpg') no-repeat center center fixed;
+            background-size: cover; 
+        }
+    }
+       
+       //this means this css file would be activated in print mode
+       @media print and (min-width:500px){
+        body{
+            background: url('./large-background.jpg') no-repeat center center fixed;
+            background-size: cover; 
+        }
+    }
+)
+- use CDNs like imigx 
+u give the cdn ur images and it gives u a link to the image it takes care of optimization , caching etc
+
+- remove image metadata
+verexif.com 
+remove the meta data from an image
+
+
+delivery optimization
+reducing the number of components a page requires
+less trips 
+
+e.g 
+not sending every single file only the ones we need are the bootstrap and mui necessary or u can use flexbox and grid
+
+use light weight library 
+
+
+
+critical render path 
+the dom describes the content of the page
+the browser receives the html and it creates the structure of the site 
+once the browser receives the all the css it generates a tree model called css object model(om) and the tree describes how the content is styled
+then it grabs the javascript then executes any changes it might want unto the dom once its all done the browser combines the dom and css om then the browser constuct a render tree then uses it to figure out the layout and forget about the files then it paints all the pixels the on the screen to form the webpage
+
+
+so how do we make this better 
+so first 
+load the styles as soon as possible and script as late as possible 
+the main performance of css is to get the styles as soon as possible 
+
+as js requires html and css to load before 
+so dont put script at the top place them at bottom 
+this makes style and media download more quickly because js blocks loading
+
+html -> load style tag in head and script in the body
+
+css -> only load whatever is needed - dont load things u dont need
+above the fold loading - see what is above the main page and load e.g u are using a single page app u dont need to load other page stuff only the main page the rest can load later using javascript
+e.g  {
+const loadStyleSheet = src => {
+    if (document.createStylesheet){
+        document.createStylesheet(src)
+    } else {
+        //so we create a link tag and reference the css we want to load
+        const stylesheet = document.createElement('link')
+        stylesheet.href = src
+        stylesheet.type = 'text/css'
+        append to the html head 
+        document.getElementsByTagname('head')[0].appendChild(stylesheet)
+    }
+}
+
+
+<script> window.onload = function(){
+        console.log('window done!')
+        loadStyleSheet('./style3.css')
+} 
+</script>
+}
+media attributes - using media queries 
+
+using media queries in html 
+
+<link rel="stylesheet" href="./style.css" media="only screen and (min-width:500px)">
+
+less specificity - target the items directly 
+
+//bad 
+.header .nav .item .link a.important {
+    color:pink 
+}
+
+
+//good
+
+a.important {
+    color: pink
+}
+
+another option is 
+inline css 
+or internal css
+
+
+
+javascript
+it block html parsing for it to finish loading so should be small as posible 
+<script>
+important scripts are here the critial ones 
+and third party script that dont affect dom
+
+<script async>
+the way to solve it is to use async 
+if core functionality requires js use async
+we tell browser to download the js file with another thread so it does not block the html it 
+which means it can execute it any time which leaves 2 issues meaning it can execute long after page loads or execute before the page finish loading it would also cause errors so we should add them to anything that does not affect dom or css model.
+
+anything that requires no knowledge of our code 
+
+
+or we defer loading our script
+<script defer>
+if core functionality does not require js
+it would wait for our html to parse before it executes this is really good for scripts that would act on a rended dom 
+
+
+avoid long running or executing js script files
+
+
+if javascript event change any part of the page it causes the redraw of the tree in this case reload so minimize dom manipulation
+
+
+two website to analyze performance
+1) page speed insights by google developer
+u enter a url and it does a speed test for u 
+https://developers.google.com/speed/pagespeed/insights/
+
+2) webpage test 
+this also let u chose web location and device
+https://www.webpagetest.org/
+
+
+
+
+http/2
+
+server requests are faster on http 2 so combining  files to one to reduce request is of no use
