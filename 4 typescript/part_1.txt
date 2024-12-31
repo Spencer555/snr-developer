@@ -1,0 +1,78 @@
+typescript is a static typed lang so u must specify the the variable explicity before using them
+
+
+pro of statically typed langs 
+1 we get documentation
+this makes it easy to get on if u pick up the projcet 
+e.g 
+function sum(a:number, b:number){
+    return a + b
+}
+sum('hello', null)
+this would error out before we even put it in production
+
+you get less bugs 
+u spend less time in debuging semantics so u can focus on debuging logic 
+
+
+cons 
+it makes our code harder to learn its an extra layer of complexity
+dont forget about unit test because u have static typing 
+it leads to slower dev process because u have to check for type errors
+
+
+javascript is weekly typed 
+var a  = 'booya'
+a + 17 
+would give you 'booya17'
+
+but with typescript it would error out
+
+
+
+how to make javascript strongly typed 
+all these tools goal is to make javascript less nicer and introduce static typing 
+
+flow - add types to js by writing code that works with flow and putting it through a complier that spits js, flow is a static type checker 
+
+// @flow - we add this to the top of our file and relies on babel to remove all the types we added before it goes to production 
+this comes with create react app
+
+typescript - by microsoft - it has it own compiler it is a superset of javascript(it add functionaliy on top of js)
+
+reason ml   - based on okamel a programming lang this is created by facebook to make it easy for js developer to pick up 
+
+the difference between typescript and reason is that reason is a seprate language on it own but typescript tries to mimic js and grow with it but reason does not depend on it
+
+angular is built with typescript and using typescript
+
+
+
+when to use typescript
+
+1 your project grows larger
+2 u have test written 
+3 code to be self documenting 
+4 budget to train people to learn a new lang 
+5 to slow down the development cycle because we are writing more code now
+
+
+
+to run typescript 
+npm install typescript 
+tsc filename
+
+
+to initialize a typescript project 
+
+tsc --init
+
+
+to run in watch mode 
+every time u save it would recompile
+tsc filename.ts --watch
+
+
+add typescript to it 
+npm install typescript @types/react @types/react-dom
+npx tsc --init

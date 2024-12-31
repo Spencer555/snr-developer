@@ -27,3 +27,12 @@ we send down a mimially functional page composed of html css and js  then as mor
 
 
 react does it by default with npm build
+
+as ur apps get bigger u wanna think of route based code spliting and that what we just illustrated and component based code spliting (breaking code into pieces and importing them when we need them)
+
+how to optimize react
+add the query string of react_perf to url in browser to check 
+
+localhost:3000/?react_perf
+
+u can now open dev tools under perfomance hit record and pause to analyze code
