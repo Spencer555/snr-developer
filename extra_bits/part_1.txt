@@ -1,0 +1,12 @@
+always choose simplicity over complexity
+
+dont try to show off to seem smart but the best always choose simplicity over complexity 
+
+good code is self documented and someone can come in look at it and just get it easily
+
+npm install is not your answer to everything weigh the pros and cons 
+
+figure out what makes you successful in learning learn how to lean 
+
+
+when learning new things understand why the solu was created and what problem its trying to solve try to see the big picture
