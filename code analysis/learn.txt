@@ -1,0 +1,6 @@
+we look at the package.json to get an idea about the project dependencies 
+
+then we look as the script to see the commands use to run the project and the main file
+
+
+so then we run the app and try to perform functions and see if there are errors and we get feedback from those errors
