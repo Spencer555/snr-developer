@@ -1,0 +1,138 @@
+redis - a no sql in memeory database it is open source it us used to build high performance opensource scalable apps
+
+
+redis is a key value storage and similar to how we handle objects i in javascript it is used for short lived datasets
+
+it is used for small pieces of data that is not important that if the server crashes we would be able to come back to it the snapshot
+
+it is usefull to have some info in redis and some on postgress depending on your needs
+
+https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/
+
+refer to documentation to see how to use on windows
+
+sudo service redis-server start
+to start redis
+
+it is used for caching and session management
+
+type redis cli to access terminal 
+
+SET name "Spencer" - we set name to spencer 
+
+to get name 
+GET name
+
+to see if something exists 
+EXISTS name
+
+to delete 
+DEL name 
+
+visit documentation to know list of command 
+
+
+expire sets a timer on key after which it delets 
+
+e.g 
+
+SET session "Jenny"
+
+expire in 10 seconds
+EXPIRE session 10
+
+
+to increment by 
+SET counter 1000
+
+increment counter by 33
+INCRBY counter 33
+
+decrement by 1 
+DECR counter
+
+set multiple things 
+
+MSET a 2 b 5 
+this sets a to 2 and b to 5 
+
+
+MGET a b 
+get the values of a and b
+
+
+datatypes 
+5 main types u would use
+strings
+hashes 
+list 
+sets 
+sorted
+
+
+hashes are maps between string field and string values
+this is a hash with a key user with id of 45 with name spencer
+HMSET  user id 45 name "spencer"
+
+
+so 
+HGET user name 
+- we get spencer
+
+HGET user id  
+- we get 45
+
+
+
+lists - adding things to it is fast but it takes a lot of time for searching but in redis it is best to use sorted list for search 
+
+
+from the left add 10
+LPUSH ourlist 10
+
+from the right add hellow
+RPUSH ourlist "hellow"
+
+to get data in list 
+
+get the data in our list through index from 0 to 1 the starting index to ending index 
+LRANGE ourlist 0 1
+
+
+
+RTRIM - to trim your list 
+RPOP - to drop whatever is on the right side
+
+
+sets and sorted sets 
+sets - are unordered collection of string it is possible to add remove and test for possible memebers in a group but has no repeated memebers 
+
+
+to add sets 
+
+SADD ourset 1 2 3 4 5
+
+get the memebers of our set
+SMEMBERS ourset 
+
+
+SISMEMBER ourset 5
+
+- is 5 a member of our set we get 1 which means yes if no we get 0
+
+every member of a sorted set is associated with a score which allows it to be ordered from smallerst to largest
+
+sorted sets 
+the number is the score it uses to arrange the items in the sets 
+team size e.g 50 
+
+ZADD team 50 "wizards"
+
+
+team size e.g 40 
+ZADD team 40 "Cavaliers"
+
+ZADD team 1 "Bolts"
+
+the rank of the team in the sets
+ZRANK team "Wizards"
